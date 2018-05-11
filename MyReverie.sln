@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goals.API", "Goals.API\Goals.API.csproj", "{FE9FC583-E7F7-47D1-884A-13A7D76C5913}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5AFFD5BD-4C05-4DD5-B27D-B5F9B8D6C738}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5C26AC7D-F78D-47D8-8A78-54B44515890F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +22,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE9FC583-E7F7-47D1-884A-13A7D76C5913} = {5C26AC7D-F78D-47D8-8A78-54B44515890F}
+		{5C26AC7D-F78D-47D8-8A78-54B44515890F} = {5AFFD5BD-4C05-4DD5-B27D-B5F9B8D6C738}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B2C5742-4763-4A1F-9F38-6936EB75698D}
