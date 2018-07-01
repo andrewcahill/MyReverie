@@ -1,10 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace IntegrationTest.Services.Goals
 {
-    class GoalsScenarios
+    public class GoalsScenarios :GoalsScenarioBase
     {
+        [Fact]
+        public async Task Get_get_goal_by_id()
+        {
+            using (var server = CreateServer())
+            {
+                var response = await server.CreateClient()
+                    .GetAsync($"api/values/5");
+
+                Assert.Equal("vlalue", await response.Content.ReadAsStringAsync());
+            }
+        }
     }
 }
