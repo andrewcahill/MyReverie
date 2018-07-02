@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace IntegrationTest.Services.Goals
@@ -16,7 +13,7 @@ namespace IntegrationTest.Services.Goals
                 var response = await server.CreateClient()
                     .GetAsync($"api/values/5");
 
-                Assert.Equal("vlalue", await response.Content.ReadAsStringAsync());
+                Assert.Equal("value", await response.Content.ReadAsStringAsync());
             }
         }
     }
