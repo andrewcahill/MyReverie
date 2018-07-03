@@ -8,7 +8,7 @@ namespace Goals.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class GoalsController : ControllerBase
     {
         // GET api/values
         [HttpGet]
