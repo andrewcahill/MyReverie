@@ -11,7 +11,7 @@ namespace IntegrationTest.Services.Goals
             using (var server = CreateServer())
             {
                 var response = await server.CreateClient()
-                    .GetAsync($"api/values/5");
+                    .GetAsync($"api/goals/5");
 
                 Assert.Equal("value", await response.Content.ReadAsStringAsync());
             }
