@@ -27,6 +27,15 @@ namespace Goals.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            services.AddApiVersioning(v =>
+                {
+                    v.ReportApiVersions = true;
+                    v.AssumeDefaultVersionWhenUnspecified = true;
+                    v.DefaultApiVersion = new ApiVersion(1, 0);
+                }
+            );
+
 
             services.AddSwaggerGen(c =>
             {
