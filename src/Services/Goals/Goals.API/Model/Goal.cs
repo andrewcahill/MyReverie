@@ -1,6 +1,6 @@
-﻿namespace Goals.API.Controllers
+﻿namespace Goals.API.Model
 {
-    internal class Goal
+    public class Goal
     {
         public int Id { get; set; }
 

@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Goals.API.Infrastructure;
+using Goals.API.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Goals.API.Controllers
 {
@@ -10,18 +14,19 @@ namespace Goals.API.Controllers
     [ApiController]
     public class GoalsController : ControllerBase
     {
+        private GoalContext _goalContext;
+
+        public GoalsController(GoalContext goalContext)
+        {
+            _goalContext = goalContext ?? throw new ArgumentNullException(nameof(goalContext));
+        }
+
         // GET api/1.0/goals
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Goal>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get()
         {
-            // Creating a dummy goal list for now this will ultimately come from data store
-            var goals = new List<Goal>
-            {
-                new Goal() { Id = 0, Name = "First Goal" },
-                new Goal() { Id = 1, Name = "Second Goal" },
-                new Goal() { Id =2, Name = "Third Goal" }
-            };
+            var goals = await _goalContext.Goals.ToListAsync();
 
             return Ok(goals);
         }
