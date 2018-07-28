@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Goals.API.Controllers
@@ -10,16 +12,33 @@ namespace Goals.API.Controllers
     {
         // GET api/1.0/goals
         [HttpGet]
-        public IEnumerable<string> Get()
+        [ProducesResponseType(typeof(IEnumerable<Goal>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            // Creating a dummy goal list for now this will ultimately come from data store
+            var goals = new List<Goal>
+            {
+                new Goal() { Id = 0, Name = "First Goal" },
+                new Goal() { Id = 1, Name = "Second Goal" },
+                new Goal() { Id =2, Name = "Third Goal" }
+            };
+
+            return Ok(goals);
         }
 
         // GET api/1.0/goals/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(typeof(Goal), (int) HttpStatusCode.OK)]
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            // Creating a dummy goal object for now this will ultimately come from data store
+            var goal = new Goal
+            {
+                Id = id,
+                Name = "First Goal"
+            };
+
+            return Ok(goal);
         }
 
         // POST api/1.0/goals
