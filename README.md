@@ -1,4 +1,6 @@
-MyReverie is a new simple side project I am working on. The idea is to build a goal tracking solution set target dates against those goals as well as set milestone markers to track progress. They could be long or short term goals – entirely up to the user.
+MyReverie
+
+A new simple side project I am working on. The idea is to build a goal tracking solution set target dates against those goals as well as set milestone markers to track progress. They could be long or short term goals – entirely up to the user.
 
 I have a rough idea of some of the features to add straight away which I will list under the Projects Tab of GitHub.
 
