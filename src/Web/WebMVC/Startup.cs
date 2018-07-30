@@ -39,6 +39,8 @@ namespace WebMVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IGoalService, GoalService>();
+
+            services.AddHttpClient<IGoalService, GoalService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
