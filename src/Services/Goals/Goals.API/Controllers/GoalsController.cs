@@ -14,12 +14,9 @@ namespace Goals.API.Controllers
     [ApiController]
     public class GoalsController : ControllerBase
     {
-        private GoalContext _goalContext;
+        private readonly GoalContext _goalContext;
 
-        public GoalsController(GoalContext goalContext)
-        {
-            _goalContext = goalContext ?? throw new ArgumentNullException(nameof(goalContext));
-        }
+        public GoalsController(GoalContext goalContext) => _goalContext = goalContext ?? throw new ArgumentNullException(nameof(goalContext));
 
         // GET api/1.0/goals
         [HttpGet]
