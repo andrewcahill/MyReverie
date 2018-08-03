@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reflection;
+using Goals.API.Controllers;
+using Goals.API.Core;
 using Goals.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Goals.API
@@ -38,7 +41,8 @@ namespace Goals.API
             services.AddCustomDbContext(Configuration);
 
 
-
+            services.AddTransient<ILogger, Logger<GoalsController>>();
+            services.AddTransient<IRepository, Repository>();
 
             services.AddSwaggerGen(c =>
             {
@@ -76,7 +80,8 @@ namespace Goals.API
         {
             services.AddDbContext<GoalContext>(options =>
             {
-                options.UseSqlServer(configuration["ConnectionString"],
+                options.UseSqlServer(
+                    "Server=(LocalDb)\\MSSQLLocalDB;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=MyReverie;Password=Pa@@W0rd;",// configuration["ConnectionString"],
                     sqlServerOptionsAction: sqlOptions =>
                     {
                         sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
