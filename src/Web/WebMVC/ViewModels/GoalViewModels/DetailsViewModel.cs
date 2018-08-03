@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebMVC.ViewModels;
 
-namespace WebMVC.Services
+namespace WebMVC.ViewModels.GoalViewModels
 {
-    public interface IGoalService
+    public class DetailsViewModel
     {
-        Task<Goal> GetGoal();
+        public Goal Goal { get; set; }
     }
 }

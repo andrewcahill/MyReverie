@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebMVC.ViewModels.GoalViewModels
 {
-    public class IndexViewModel
+    public class EditViewModel
     {
-        public List<Goal> Goals { get; set; }
+        public Goal Goal { get; set; }
     }
 }

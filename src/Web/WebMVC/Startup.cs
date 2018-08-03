@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using WebMVC.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebMVC.Interfaces;
 using WebMVC.Services;
 
 namespace WebMVC
