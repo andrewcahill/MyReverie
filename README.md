@@ -11,11 +11,10 @@ I will be buildign this solution with clean architecture principles in mind as I
 I will blog about certain features I implement at http://www.aviddeveloper.com.
 
 # Running the application
-I have created two branches one development and one master, the master should always be in a good running state allowing you to run straight away, the dev branch may be in flux throughout.
 
-The application is using SQL Server as its data store.
+The application is using SQL Server as its data store, After cloning or downloading the sample you will need to run its Entity Framework Core migrations before you will be able to run the app.
 
-Ensure your connection strings in `appsettings.json` point to a local SQL Server instance.
+Ensure your connection strings in `appsettings.json` point to your SQL Server instance.
 
 In order to run the solution you will need to ensure the web application as well as the API project as startup, for development/testing simple set the solution to start multiple project under Solution Properties.
 
