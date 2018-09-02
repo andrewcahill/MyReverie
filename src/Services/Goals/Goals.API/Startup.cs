@@ -81,7 +81,7 @@ namespace Goals.API
             services.AddDbContext<GoalContext>(options =>
             {
                 options.UseSqlServer(
-                    "Server=(LocalDb)\\MSSQLLocalDB;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=MyReverie;Password=Pa@@W0rd;",// configuration["ConnectionString"],
+                    "Server=(LocalDb)\\MSSQLLocalDB;Database=MyReverie.Services.GoalDb;User Id=MyReverie;Password=Pa@@W0rd;",// configuration["ConnectionString"],
                     sqlServerOptionsAction: sqlOptions =>
                     {
                         sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);

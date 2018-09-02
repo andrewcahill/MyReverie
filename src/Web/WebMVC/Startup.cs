@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebMVC.Interfaces;
 using WebMVC.Services;
+using Microsoft.Extensions.Options;
 
 namespace WebMVC
 {
@@ -31,6 +32,9 @@ namespace WebMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddOptions();
+            services.Configure<AppSettings>(Configuration.GetSection("Urls"));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -42,10 +46,12 @@ namespace WebMVC
             services.AddTransient<IGoalService, GoalService>();
 
             services.AddHttpClient<IGoalService, GoalService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptionsSnapshot<AppSettings> settings)
         {
             if (env.IsDevelopment())
             {
