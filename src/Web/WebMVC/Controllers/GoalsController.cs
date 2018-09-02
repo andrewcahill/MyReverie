@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using WebMVC.Interfaces;
 using WebMVC.ViewModels;
 using WebMVC.ViewModels.GoalViewModels;
@@ -11,15 +13,19 @@ namespace WebMVC.Controllers
     {
         private readonly IGoalService _goalService;
         private readonly ILogger _logger;
+        private readonly IOptions<AppSettings> _settings;
 
-        public GoalsController(IGoalService goalService, ILogger<GoalsController> logger)
+        public GoalsController(IGoalService goalService, ILogger<GoalsController> logger, IOptions<AppSettings> settings)
         {
             _goalService = goalService;
             _logger = logger;
+            _settings = settings;
         }
 
         public async Task<IActionResult> Index()
         {
+            _logger.Log(LogLevel.Information, "");
+
             var vm = new IndexViewModel()
             {
                 Goals = await _goalService.GetGoals()

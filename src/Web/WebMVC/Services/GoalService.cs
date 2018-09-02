@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebMVC.Interfaces;
 using WebMVC.ViewModels;
@@ -11,14 +12,17 @@ namespace WebMVC.Services
     {
         private readonly HttpClient _httpClient;
 
-        public GoalService(HttpClient httpClient)
+        private readonly AppSettings _appSettings;
+
+        public GoalService(HttpClient httpClient, IOptions<AppSettings> appSettings)
         {
             _httpClient = httpClient;
+            _appSettings = appSettings.Value;
         }
 
         public async Task<Goal> GetGoal(int id)
         {
-            string uri = "https://localhost:44395/api/1.0/goals/" + id;
+            string uri = _appSettings.GoalsUrl + id;
 
             var responseString = await _httpClient.GetStringAsync(uri);
 

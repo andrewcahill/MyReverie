@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using Xunit;
 using Moq;
@@ -8,6 +9,8 @@ using WebMVC.Controllers;
 using WebMVC.Services;
 using WebMVC.ViewModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using WebMVC;
 using WebMVC.Interfaces;
 using WebMVC.ViewModels.GoalViewModels;
 
@@ -17,11 +20,13 @@ namespace UnitTest.Goals.Application
     {
         private readonly Mock<IGoalService> _iGoalServiceMock;
         private readonly Mock<ILogger<GoalsController>> _iLoggerMock;
+        private readonly Mock<IOptions<AppSettings>> _iOptionsMock;
 
         public GoalControllerTest()
         {
-            _iGoalServiceMock = new Mock<IGoalService>();   
+            _iGoalServiceMock = new Mock<IGoalService>();
             _iLoggerMock = new Mock<ILogger<GoalsController>>();
+            _iOptionsMock = new Mock<IOptions<AppSettings>>();
         }
 
         [Fact]
@@ -51,7 +56,7 @@ namespace UnitTest.Goals.Application
 
 
 
-            GoalsController goalController = new GoalsController(_iGoalServiceMock.Object, _iLoggerMock.Object);
+            GoalsController goalController = new GoalsController(_iGoalServiceMock.Object, _iLoggerMock.Object, _iOptionsMock.Object);
 
             var actionResult = await goalController.Index();
 
