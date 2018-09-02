@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/fkrnnyvse8tdmdph?svg=true)](https://ci.appveyor.com/project/andrewcahill/myreverie)
+
 # MyReverie
 
 The idea of this repository is to build a goal tracking solution. The goals are could be considered a wishlist of things you would like to acheive by a certain time such as travel to a certain desitnation, acheive a certain qualification, purchase a property, start up a business etc. The set are entirely up to the user - this solution is merely a tool to help users acheive these goals by allowing them to set timelines, reminders, progress trackers, motivational quotations etc.
