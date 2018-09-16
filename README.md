@@ -1,5 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/fkrnnyvse8tdmdph?svg=true)](https://ci.appveyor.com/project/andrewcahill/myreverie)
 
+[![Build status](https://dev.azure.com/aviddeveloper/My%20Reverie/_apis/build/status/My%20Reverie-ASP.NET%20Core-CI%20(1))](https://dev.azure.com/aviddeveloper/My%20Reverie/_build/latest?definitionId=2)
+
 # MyReverie
 
 The idea of this repository is to build a goal tracking solution. The goals are could be considered a wishlist of things you would like to acheive by a certain time such as travel to a certain desitnation, acheive a certain qualification, purchase a property, start up a business etc. The set are entirely up to the user - this solution is merely a tool to help users acheive these goals by allowing them to set timelines, reminders, progress trackers, motivational quotations etc.
