@@ -1,5 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/fkrnnyvse8tdmdph?svg=true)](https://ci.appveyor.com/project/andrewcahill/myreverie)
-
 [![Build status](https://dev.azure.com/aviddeveloper/My%20Reverie/_apis/build/status/My%20Reverie-ASP.NET%20Core-CI%20(1))](https://dev.azure.com/aviddeveloper/My%20Reverie/_build/latest?definitionId=2)
 
 # MyReverie
