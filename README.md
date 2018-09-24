@@ -8,7 +8,7 @@ I plan to outline the features under the Projects Tab of GitHub.
 
 In building this solution it enables me to learn and use various new technologies, some technologies I will be looking to incorporate are Asp.Net Core, Swagger, Docker,  xUnit.Net and EF Core, Docker, AI/ML, Azure etc.
 
-I will be buildign this solution with clean architecture principles in mind as I go. 
+I will be building this solution with clean architecture principles in mind as I go. 
 
 I will blog about certain features I implement at http://www.aviddeveloper.com.
 
