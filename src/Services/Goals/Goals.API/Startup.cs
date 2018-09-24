@@ -37,14 +37,13 @@ namespace Goals.API
                 }
             );
 
-
+            // Use SQL Server
             //services.AddCustomDbContext(Configuration);
+
+            // Use In memory database
             string dbName = Guid.NewGuid().ToString();
             services.AddDbContext<GoalContext>(options =>
                 options.UseInMemoryDatabase(dbName));
-
-
-
 
             services.AddTransient<ILogger, Logger<GoalsController>>();
             services.AddTransient<IRepository, Repository>();
@@ -85,11 +84,6 @@ namespace Goals.API
         {
             services.AddDbContext<GoalContext>(options =>
             {
-
-
-
-
-
                 options.UseSqlServer(
                     "Server=(LocalDb)\\MSSQLLocalDB;Database=MyReverie.Services.GoalDb;User Id=MyReverie;Password=Pa@@W0rd;",// configuration["ConnectionString"],
                     sqlServerOptionsAction: sqlOptions =>

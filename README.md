@@ -14,9 +14,10 @@ I will blog about certain features I implement at http://www.aviddeveloper.com.
 
 # Running the application
 
-The application is using SQL Server as its data store, After cloning or downloading the sample you will need to run its Entity Framework Core migrations before you will be able to run the app.
-
-Ensure your connection strings in `appsettings.json` point to your SQL Server instance.
+The application is using and In Memory database as its data store  for simplicity, however there is capability to switch to SQL Server. If you would like to change to a SQL Server there a a few steps to perform
+1) You will need to run its Entity Framework Core migrations.
+2) Update the startup class -> uncomment the SQL Server section and comment the In-Memory section
+3) Ensure your connection string in `appsettings.json` points to your SQL Server instance.
 
 In order to run the solution you will need to ensure the web application as well as the API project as startup, for development/testing simple set the solution to start multiple project under Solution Properties.
 
