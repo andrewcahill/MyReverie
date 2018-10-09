@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Permissions;
 using System.Threading.Tasks;
 using Xunit;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using WebMVC.Controllers;
-using WebMVC.Services;
 using WebMVC.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -51,10 +48,6 @@ namespace UnitTest.Goals.Application
                         Name = "Third Goal"
                     }
                 }));
-
-
-
-
 
             GoalsController goalController = new GoalsController(_iGoalServiceMock.Object, _iLoggerMock.Object, _iOptionsMock.Object);
 
