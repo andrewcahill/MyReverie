@@ -39,7 +39,7 @@ namespace Goals.API.Controllers
         // GET api/1.0/goals/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Goal), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
             var goal = await _repository.GetGoalAsync(id);
 

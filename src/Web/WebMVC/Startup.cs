@@ -46,6 +46,14 @@ namespace WebMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddAuthorization(configure =>
+            {
+                configure.AddPolicy("Goals", policy =>
+                {
+                    policy.RequireUserName("andrew@aviddeveloper.com").Build();
+                });
+            });
+
             services.AddTransient<IGoalService, GoalService>();
         }
 
