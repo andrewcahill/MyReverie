@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebMVC.Interfaces;
 using WebMVC.Services;
 using Microsoft.Extensions.Options;
+using Polly;
 
 namespace WebMVC
 {
@@ -32,6 +33,8 @@ namespace WebMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpClient("api").AddTransientHttpErrorPolicy(p => p.RetryAsync(5));
+
             services.AddOptions();
             services.Configure<AppSettings>(Configuration.GetSection("Urls"));
 
@@ -44,10 +47,6 @@ namespace WebMVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IGoalService, GoalService>();
-
-            services.AddHttpClient<IGoalService, GoalService>();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
