@@ -6,6 +6,17 @@
 <hr />
 <div>
     <h4>@Html.DisplayNameFor(model => model.Goal.Name)</h4>
-    
-        @Html.DisplayFor(model => model.Goal.Name)
+
+    @Html.DisplayFor(model => model.Goal.Name)
+
+    <h4>@Html.DisplayNameFor(model => model.Goal.Description)</h4>
+
+    @Html.DisplayFor(model => model.Goal.Description)
+
+    <h4>@Html.DisplayNameFor(model => model.Goal.TargetDate)</h4>
+
+    @Html.DisplayFor(model => model.Goal.TargetDate)
+</div>
+<div>
+    <a asp-area="" asp-controller="Goals" asp-action="Index">Back to List</a>
 </div>

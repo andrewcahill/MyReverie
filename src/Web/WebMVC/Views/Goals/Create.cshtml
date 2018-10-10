@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Create";
-@model WebMVC.ViewModels.GoalViewModels.CreateViewModel
-        }
+    @model WebMVC.ViewModels.GoalViewModels.CreateViewModel
+}
 
 <h2>Create</h2>
 
@@ -17,8 +17,26 @@
                 <span asp-validation-for="Goal.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Goal.Description" class="control-label"></label>
+                <input asp-for="Goal.Description" class="form-control" />
+                <span asp-validation-for="Goal.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Goal.TargetDate" class="control-label"></label>
+                <input asp-for="Goal.TargetDate" class="form-control" />
+                <span asp-validation-for="Goal.TargetDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
+
+<div>
+    <a asp-area="" asp-controller="Goals" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
