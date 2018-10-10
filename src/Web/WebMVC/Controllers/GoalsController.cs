@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -88,8 +89,15 @@ namespace WebMVC.Controllers
         // POST: Default/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ProducesResponseType(201, Type = typeof(Goal))]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> Create(Goal goal)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 await _goalService.AddGoalAsync(goal);
