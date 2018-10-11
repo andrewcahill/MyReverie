@@ -6,26 +6,32 @@
 <h2>Goals</h2>
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Goals[0].Name)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Goals[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Goals[0].TargetDate)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Goals)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <a class="esh-orders-link" asp-controller="Goals" asp-action="Details" asp-route-goalId="@item.Id">Detail</a>
-                    <a class="esh-orders-link" asp-controller="Goals" asp-action="Edit" asp-route-goalId="@item.Id">Edit</a>
-                    <a class="esh-orders-link" asp-controller="Goals" asp-action="Delete" asp-route-goalId="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetDate)
+            </td>
+            <td>
+                <a class="esh-orders-link" asp-controller="Goals" asp-action="Details" asp-route-goalId="@item.Id">Detail</a>
+                <a class="esh-orders-link" asp-controller="Goals" asp-action="Edit" asp-route-goalId="@item.Id">Edit</a>
+                <a class="esh-orders-link" asp-controller="Goals" asp-action="Delete" asp-route-goalId="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     <tr>
         <td>
