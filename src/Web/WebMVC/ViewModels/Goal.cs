@@ -17,7 +17,7 @@ namespace WebMVC.ViewModels
         public string Description { get; set; }
 
         [Required]
-        [DisplayName("Target Name")]
+        [DisplayName("Target Date")]
         [DataType(DataType.Date)]
         public DateTime TargetDate { get; set; }
     }
