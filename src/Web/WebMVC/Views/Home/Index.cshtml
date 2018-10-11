@@ -2,12 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-
 <div class="row">
     <h2>Welcome to My Reverie</h2>
+    <p>Click login to Begin!</p>
     <div class="col-md-3">
-        <a asp-area="" asp-controller="Goals" asp-action="Index">About</a>       
+        <a asp-area="" asp-controller="Home" asp-action="About">About</a>
     </div>
-    
+    <div class="col-md-3">
+        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    <div class="col-md-3">
+        <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+    </div>
 </div>
