@@ -41,9 +41,22 @@ namespace Goals.API
             //services.AddCustomDbContext(Configuration);
 
             // Use In memory database
-            string dbName = Guid.NewGuid().ToString();
+            //string dbName = Guid.NewGuid().ToString();
+            //services.AddDbContext<GoalContext>(options =>
+            //    options.UseInMemoryDatabase(dbName));
+
+            // Use SQLite db
             services.AddDbContext<GoalContext>(options =>
-                options.UseInMemoryDatabase(dbName));
+            options.UseSqlite("DataSource=Goals.db"));
+
+
+
+
+
+
+
+
+
 
             services.AddTransient<ILogger, Logger<GoalsController>>();
             services.AddTransient<IRepository, Repository>();

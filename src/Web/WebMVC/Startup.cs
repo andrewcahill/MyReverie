@@ -38,9 +38,16 @@ namespace WebMVC
             services.AddOptions();
             services.Configure<AppSettings>(Configuration.GetSection("Urls"));
 
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+            // Use SQLite db
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlite("DataSource =Identity.db"));
+
+
+
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
