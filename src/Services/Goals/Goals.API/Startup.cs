@@ -47,7 +47,7 @@ namespace Goals.API
 
             // Use SQLite db
             services.AddDbContext<GoalContext>(options =>
-            options.UseSqlite("DataSource=Goals.db"));
+            options.UseSqlite("DataSource=GoalsDB.db"));
 
 
 
