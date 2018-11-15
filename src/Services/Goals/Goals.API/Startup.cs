@@ -49,15 +49,6 @@ namespace Goals.API
             services.AddDbContext<GoalContext>(options =>
             options.UseSqlite("DataSource=Goals.db"));
 
-
-
-
-
-
-
-
-
-
             services.AddTransient<ILogger, Logger<GoalsController>>();
             services.AddTransient<IRepository, Repository>();
 
