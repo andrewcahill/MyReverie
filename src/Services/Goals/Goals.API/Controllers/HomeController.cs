@@ -10,7 +10,7 @@ namespace Goals.API.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return new RedirectResult("~/swagger");
         }
     }
 }
