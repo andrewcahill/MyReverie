@@ -11,7 +11,7 @@ namespace Goals.API.Controllers
 {
     [Produces("application/json")]
     [ApiVersion("1.0")]
-    [Route("api/{v:apiVersion}/[controller]")]
+    [Route("{v:apiVersion}/[controller]")]
     [ApiController]
     public class GoalsController : ControllerBase
     {
