@@ -70,14 +70,14 @@ namespace Goals.API
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Reverie V1");
                 });
 
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
+            //else
+            //{
+                //app.UseHsts();
+            //}
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
 
             //app.UseMvc(routes =>
