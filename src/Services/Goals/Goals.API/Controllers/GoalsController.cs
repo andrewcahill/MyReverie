@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Goals.API.Core;
 using Goals.API.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +13,7 @@ namespace Goals.API.Controllers
     [Produces("application/json")]
     [ApiVersion("1.0")]
     [Route("{v:apiVersion}/[controller]")]
+    [Authorize]
     [ApiController]
     public class GoalsController : ControllerBase
     {
@@ -25,7 +27,7 @@ namespace Goals.API.Controllers
         }
 
         // GET api/1.0/goals
-        [HttpGet]
+        [HttpGet]        
         [ProducesResponseType(typeof(IEnumerable<Goal>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get()
         {

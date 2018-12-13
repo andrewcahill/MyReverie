@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -26,7 +25,7 @@ namespace WebMVC.Controllers
         {
             _logger.Log(LogLevel.Information, "");
 
-            var vm = new IndexViewModel()
+            IndexViewModel vm = new IndexViewModel()
             {
                 Goals = await _goalService.GetGoals()
             };

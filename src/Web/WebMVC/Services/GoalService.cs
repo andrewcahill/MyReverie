@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebMVC.Interfaces;
@@ -21,9 +23,11 @@ namespace WebMVC.Services
 
         public async Task<Goal> GetGoal(int id)
         {
-            string uri = _appSettings.GoalsUrl + id;
+            HttpClient client = await GetClient();
 
-            var responseString = await _httpClientFactory.CreateClient("api").GetStringAsync(uri);
+            string uri = _appSettings.GoalsUrl + "/"  + id;
+
+            var responseString = await client.GetStringAsync(uri);
 
             var goal = JsonConvert.DeserializeObject<Goal>(responseString);
 
@@ -32,38 +36,75 @@ namespace WebMVC.Services
 
         public async Task<List<Goal>> GetGoals()
         {
-            string uri = _appSettings.GoalsUrl;
-
-            var responseString = await _httpClientFactory.CreateClient("api").GetStringAsync(uri);
-
-            var goals = JsonConvert.DeserializeObject<List<Goal>>(responseString);
+            HttpClient client = await GetClient();
+            var content = await client.GetStringAsync(_appSettings.GoalsUrl);
+            var goals = JsonConvert.DeserializeObject<List<Goal>>(content);
 
             return goals;
         }
 
+        private async Task<HttpClient> GetClient()
+        {
+            TokenResponse tokenResponse = await GetToken();
+            HttpClient client = _httpClientFactory.CreateClient("api");
+            client.SetBearerToken(tokenResponse.AccessToken);
+            return client;
+        }
+
+        private static async Task<TokenResponse> GetToken()
+        {
+            var client = new HttpClient();
+            var disco = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = "http://identity",
+                Policy =
+                {
+                    RequireHttps = false
+                }
+            });
+            if (disco.IsError)
+            {
+                throw new Exception(disco.Error);
+            }
+
+            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            {
+                Address = disco.TokenEndpoint,
+
+                ClientId = "client",
+                ClientSecret = "secret",
+                Scope = "api1"
+            });
+            return tokenResponse;
+        }
+
         public async Task PutGoalAsync(Goal goalToUpdate)
         {
-            string uri = _appSettings.GoalsUrl + goalToUpdate.Id;
+            HttpClient client = await GetClient();
 
-            var response = await _httpClientFactory.CreateClient("api").PutAsJsonAsync(uri, goalToUpdate);
+            string uri = _appSettings.GoalsUrl + "/" + goalToUpdate.Id;
+
+            var response = await client.PutAsJsonAsync(uri, goalToUpdate);
 
             response.EnsureSuccessStatusCode();
         }
 
         public async Task AddGoalAsync(Goal goalToAdd)
         {
-            string uri = _appSettings.GoalsUrl;
+            HttpClient client = await GetClient();
 
-            var response = await _httpClientFactory.CreateClient("api").PostAsJsonAsync(uri, goalToAdd);
+            var response = await client.PostAsJsonAsync(_appSettings.GoalsUrl, goalToAdd);
 
             response.EnsureSuccessStatusCode();
         }
 
         public async Task DeleteGoalAsync(Goal goalToDelete)
         {
-            string uri = _appSettings.GoalsUrl + goalToDelete.Id;
+            HttpClient client = await GetClient();
 
-            var response = await _httpClientFactory.CreateClient("api").DeleteAsync(uri);
+            string uri = _appSettings.GoalsUrl + "/" + goalToDelete.Id;
+
+            var response = await client.DeleteAsync(uri);
 
             response.EnsureSuccessStatusCode();
         }
