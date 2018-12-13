@@ -14,6 +14,6 @@ namespace Goals.API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-            .ConfigureLogging((logging) => { logging.AddConsole(); });
+            .ConfigureLogging((logging) => { logging.AddConsole(); });                       
     }
 }

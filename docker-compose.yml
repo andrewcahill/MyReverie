@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  goals.api:
+    image: ${DOCKER_REGISTRY-}goalsapi
+    container_name: api
+    networks:
+      - myreverienetwork
+    build:
+      context: .
+      dockerfile: src/Services/Goals/Goals.API/Dockerfile
+
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identityapi
+    container_name: identity
+    networks:
+      - myreverienetwork
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Identity.API/Dockerfile
+
+  webmvc:
+    image: ${DOCKER_REGISTRY-}webmvc
+    container_name: web
+    networks:
+      - myreverienetwork
+    build:
+      context: .
+      dockerfile: src/Web/WebMVC/Dockerfile
+
+networks:
+  myreverienetwork:
+    driver: bridge
