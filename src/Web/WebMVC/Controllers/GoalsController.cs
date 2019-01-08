@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -8,6 +9,7 @@ using WebMVC.ViewModels.GoalViewModels;
 
 namespace WebMVC.Controllers
 {
+    [Authorize]
     public class GoalsController : Controller
     {
         private readonly IGoalService _goalService;
