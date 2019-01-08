@@ -26,36 +26,38 @@ namespace Goals.API.Controllers
             _logger = logger;
         }
 
-        // GET api/1.0/goals
+        // GET 1.0/goals
         [HttpGet]        
         [ProducesResponseType(typeof(IEnumerable<Goal>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get()
         {
-            var goals = await _repository.GetGoalsAsync();
-
             _logger.Log(LogLevel.Information, "Called Get");
+
+            var goals = await _repository.GetGoalsAsync();
 
             return Ok(goals);
         }
 
-        // GET api/1.0/goals/5
+        // GET 1.0/goals/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Goal), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
+            _logger.Log(LogLevel.Information, "Called Get with Id");
+
             var goal = await _repository.GetGoalAsync(id);
 
             if (goal == null)
             {
+                _logger.Log(LogLevel.Error, $"Error getting goal with Id {id}");
+
                 throw new KeyNotFoundException();
             }
-
-            _logger.Log(LogLevel.Information, "Called Get with Id");
 
             return Ok(goal);
         }
 
-        // POST api/1.0/goals
+        // POST 1.0/goals
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Goal goal)
         {
@@ -72,12 +74,13 @@ namespace Goals.API.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.Log(LogLevel.Error, $"Error posting goal, see Stack trace:  {ex.StackTrace}");
+                throw ex;
             }
             return NoContent();
         }
 
-        // PUT api/1.0/goals/5
+        // PUT 1.0/goals/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Goal goal)
         {
@@ -99,12 +102,14 @@ namespace Goals.API.Controllers
             }
             catch (Exception ex)
             {
+                _logger.Log(LogLevel.Error, $"Error putting Goal, see Stack Trace {ex.StackTrace}");
 
+                throw ex;
             }
             return NoContent();
         }
 
-        // DELETE api/1.0/goals/5
+        // DELETE 1.0/goals/5
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
@@ -114,6 +119,7 @@ namespace Goals.API.Controllers
 
                 if (goal == null)
                 {
+                    _logger.Log(LogLevel.Error, $"Error finding goals with id: {id}");
                     throw new KeyNotFoundException();
                 }
 
@@ -121,7 +127,7 @@ namespace Goals.API.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.Log(LogLevel.Error, $"Error deleting goal with id: {id}, see stack trace {ex.StackTrace}");
             }
         }
     }
