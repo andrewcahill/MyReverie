@@ -1,6 +1,16 @@
 version: '3.4'
 
 services:
+
+  MyReverieGateway:
+    image: ${DOCKER_REGISTRY-}myreveriegateway
+    container_name: myreveriegateway
+    networks:
+      - myreverienetwork
+    build:
+      context: .
+      dockerfile: src/ApiGateways/MyReverieGateway/Dockerfile
+
   goals.api:
     image: ${DOCKER_REGISTRY-}goalsapi
     container_name: api
@@ -27,6 +37,8 @@ services:
     build:
       context: .
       dockerfile: src/Web/WebMVC/Dockerfile
+    environment:
+      - "Urls:goalUrl=http://api/1/goals"
 
 networks:
   myreverienetwork:

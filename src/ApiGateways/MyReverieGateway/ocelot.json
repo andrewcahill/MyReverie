@@ -1,0 +1,18 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/1.0/{CatchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/goalsapi/{CatchAll}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://myreveriegateway:80"
+  }
+}
