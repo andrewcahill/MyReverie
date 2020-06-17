@@ -45,6 +45,10 @@ namespace WebMVC
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite("DataSource =Identity.db"));
 
+
+            
+
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
