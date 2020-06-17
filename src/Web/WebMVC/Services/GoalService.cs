@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
@@ -84,7 +85,9 @@ namespace WebMVC.Services
 
             string uri = _appSettings.GoalsUrl + "/" + goalToUpdate.Id;
 
-            var response = await client.PutAsJsonAsync(uri, goalToUpdate);
+            var response = await client.PutAsync(uri, new StringContent(
+                JsonConvert.SerializeObject(goalToUpdate),
+                Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();
         }
@@ -93,7 +96,9 @@ namespace WebMVC.Services
         {
             HttpClient client = await GetClient();
 
-            var response = await client.PostAsJsonAsync(_appSettings.GoalsUrl, goalToAdd);
+            var response = await client.PostAsync(_appSettings.GoalsUrl, new StringContent(
+                JsonConvert.SerializeObject(goalToAdd),
+                Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();
         }
