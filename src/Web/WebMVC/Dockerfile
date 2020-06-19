@@ -1,9 +1,9 @@
-FROM microsoft/dotnet:3.1-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM microsoft/dotnet:3.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY src/Web/WebMVC/WebMVC.csproj src/Web/WebMVC/
 RUN dotnet restore src/Web/WebMVC/WebMVC.csproj
