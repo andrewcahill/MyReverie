@@ -10,7 +10,7 @@ In building this solution it enables me to learn and use various new technologie
 
 I will be building this solution with clean architecture principles in mind as I go. 
 
-I will blog about certain features I implement at http://www.aviddeveloper.com.
+I will blog about certain features I implement in my blog : http://www.aviddeveloper.com.
 
 # Running the application
 
