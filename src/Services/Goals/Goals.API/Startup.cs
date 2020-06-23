@@ -66,8 +66,10 @@ namespace Goals.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My Reverie", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Reverie", Version = "v1" });
             });
+
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         private void InitializeMyDatabase(IApplicationBuilder app)
