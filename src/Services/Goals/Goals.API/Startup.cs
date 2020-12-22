@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Goals.API
 {
@@ -27,15 +27,13 @@ namespace Goals.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
             services.AddMvcCore()
             .AddAuthorization();
 
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://identity";
+                    options.Authority = "http://identity";// "http://localhost:5000";
                     options.RequireHttpsMetadata = false;
 
                     options.ApiName = "api1";
@@ -69,7 +67,7 @@ namespace Goals.API
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Reverie", Version = "v1" });
             });
 
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         private void InitializeMyDatabase(IApplicationBuilder app)
@@ -82,12 +80,11 @@ namespace Goals.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)// IHostingEnvironment env)
         {
             InitializeMyDatabase(app);
 
-
-            if (env.IsDevelopment())
+            if(env.IsDevelopment())
             {
                 app.UseSwagger();
 
@@ -96,27 +93,26 @@ namespace Goals.API
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Reverie V1");
                 });
 
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
+
             }
-            //else
-            //{
-            //app.UseHsts();
-            //}
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
 
-            //app.UseHttpsRedirection();
-            app.UseMvc();
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
-
-            app.UseMvcWithDefaultRoute();
         }
     }
 
@@ -137,7 +133,7 @@ namespace Goals.API
 
                 // Changing default behavior when client evaluation occurs to throw. 
                 // Default in EF Core would be to log a warning when client evaluation is performed.
-                options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+                //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
                 //Check Client vs. Server evaluation: https://docs.microsoft.com/en-us/ef/core/querying/client-eval
             });
 

@@ -1,7 +1,7 @@
 {
-  "ReRoutes": [
+  "Routes": [
     {
-      "DownstreamPathTemplate": "/1.0/{CatchAll}",
+      "DownstreamPathTemplate": "/1/{CatchAll}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
