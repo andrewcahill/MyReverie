@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Goals.API.Core;
+using Goals.API.Exceptions;
 using Goals.API.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,7 +25,13 @@ namespace Goals.API.Infrastructure
 
         public async Task<Goal> GetGoalAsync(int id)
         {
-            return await _goalContext.Goals.FindAsync(id);
+            var goal = await _goalContext.Goals.FindAsync(id);
+
+            if (goal == null)
+            {   
+                throw new GoalNotFoundException($"Cannot find goal: {id}");
+            }
+            return goal;// await _goalContext.Goals.FindAsync(id);
         }
 
         public async Task AddGoalAsync(Goal goal)

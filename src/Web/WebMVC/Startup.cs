@@ -11,6 +11,10 @@ using WebMVC.Interfaces;
 using WebMVC.Services;
 using Microsoft.Extensions.Options;
 using Polly;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Net.Http;
+using Polly.Extensions.Http;
 
 namespace WebMVC
 {
@@ -33,7 +37,16 @@ namespace WebMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddHttpClient("api").AddTransientHttpErrorPolicy(p => p.RetryAsync(5));
+            services.AddHttpClient("api")//<IGoalService, GoalService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
+                .AddPolicyHandler(GetRetryPolicy());
+
+
+            
+
+
+            // ----------------------------------
+
 
             services.AddOptions();
             services.Configure<AppSettings>(Configuration.GetSection("Urls"));
@@ -46,13 +59,21 @@ namespace WebMVC
             options.UseSqlite("DataSource =Identity.db"));
 
 
-            
+
+            //services.AddRazorPages(options =>
+            //{
+            //    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+            //    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            //    options.Conventions.AuthorizeAreaPage("Admin", "/Index");
+            //    options.Conventions.AuthorizeAreaFolder("Admin", "/Users");
+            //})
+            //.AddNewtonsoftJson();
+
+
 
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAuthorization(configure =>
             {
@@ -62,13 +83,24 @@ namespace WebMVC
                 });
             });
 
-            services.AddTransient<IGoalService, GoalService>();
+            services.AddControllersWithViews().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddRazorPages();
 
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddTransient<IGoalService, GoalService>();
+        }
+
+        // Exponential backoff policy
+        private IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            return HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
+            .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2,
+                                                                        retryAttempt)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptionsSnapshot<AppSettings> settings)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptionsSnapshot<AppSettings> settings)
         {
             if (env.IsDevelopment())
             {
@@ -87,11 +119,16 @@ namespace WebMVC
 
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

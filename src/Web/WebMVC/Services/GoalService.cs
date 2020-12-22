@@ -28,11 +28,23 @@ namespace WebMVC.Services
 
             string uri = _appSettings.GoalsUrl + "/"  + id;
 
-            var responseString = await client.GetStringAsync(uri);
+            try
+            {
 
-            var goal = JsonConvert.DeserializeObject<Goal>(responseString);
+                var responseString = await client.GetStringAsync(uri);
 
-            return goal;
+                var goal = JsonConvert.DeserializeObject<Goal>(responseString);
+
+                return goal;
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                return null;
+            }
+            {
+
+            }
         }
 
         public async Task<List<Goal>> GetGoals()
@@ -57,7 +69,7 @@ namespace WebMVC.Services
             var client = new HttpClient();
             var disco = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
-                Address = "http://identity",
+                Address = "http://identity",// "http://localhost:5000",//identity",
                 Policy =
                 {
                     RequireHttps = false

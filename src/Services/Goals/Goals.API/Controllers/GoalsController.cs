@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Goals.API.Core;
+using Goals.API.Exceptions;
 using Goals.API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,16 +46,26 @@ namespace Goals.API.Controllers
         {
             _logger.Log(LogLevel.Information, "Called Get with Id");
 
-            var goal = await _repository.GetGoalAsync(id);
+            try
+            {
+                var goal = await _repository.GetGoalAsync(id);
 
-            if (goal == null)
+                //if (goal == null)
+                //{
+                    //_logger.Log(LogLevel.Error, $"Error getting goal with Id {id}");
+
+                    //throw new KeyNotFoundException();
+                //}
+
+                return Ok(goal);
+
+            }
+            catch (GoalNotFoundException)
             {
                 _logger.Log(LogLevel.Error, $"Error getting goal with Id {id}");
 
-                throw new KeyNotFoundException();
+                throw new GoalNotFoundException($"Cannot find goal: {id}");
             }
-
-            return Ok(goal);
         }
 
         // POST 1.0/goals
