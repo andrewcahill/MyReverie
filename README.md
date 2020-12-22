@@ -1,4 +1,4 @@
-[![Build status](https://aviddeveloper.visualstudio.com/My%20Reverie/_apis/build/status/My%20Reverie-CI)](https://aviddeveloper.visualstudio.com/My%20Reverie/_build/latest?definitionId=2)
+[![Build status](https://aviddeveloper.visualstudio.com/My%20Reverie/_apis/build/status/My%20Reverie-PR%20Analysis)](https://aviddeveloper.visualstudio.com/My%20Reverie/_build/latest?definitionId=2)
 
 # MyReverie
 
