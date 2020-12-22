@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Goals.API.Core;
+using Goals.API.Core.Entities;
 using Goals.API.Exceptions;
-using Goals.API.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goals.API.Infrastructure
