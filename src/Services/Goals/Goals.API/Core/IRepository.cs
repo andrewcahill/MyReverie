@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Goals.API.Model;
+using Goals.API.Core.Entities;
 
 namespace Goals.API.Core
 {

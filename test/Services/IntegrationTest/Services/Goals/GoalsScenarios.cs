@@ -1,5 +1,5 @@
-﻿using Goals.API.Infrastructure;
-using Goals.API.Model;
+﻿using Goals.API.Core.Entities;
+using Goals.API.Infrastructure;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

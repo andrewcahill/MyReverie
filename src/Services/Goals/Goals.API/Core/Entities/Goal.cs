@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Goals.API.Model
+namespace Goals.API.Core.Entities
 {
     public class Goal
     {

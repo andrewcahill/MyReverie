@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Goals.API.Model;
+using Goals.API.Core.Entities;
+
 namespace Goals.API.Infrastructure
 {
     public class GoalContext : DbContext
