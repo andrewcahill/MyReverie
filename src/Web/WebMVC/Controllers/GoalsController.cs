@@ -25,15 +25,12 @@ namespace WebMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            _logger.Log(LogLevel.Information, "");
+            _logger.Log(LogLevel.Information, "Called Index");
 
             IndexViewModel vm = new IndexViewModel()
             {
                 Goals = await _goalService.GetGoals()
             };
-
-            // Will log something more meaningful then this - this is just test for now
-            _logger.Log(LogLevel.Information, "Called Index method");
 
             return View(vm);
         }
@@ -45,7 +42,6 @@ namespace WebMVC.Controllers
                 Goal = await _goalService.GetGoal(goalId)
             };
 
-            // Will log something more meaningful then this - this is just test for now
             _logger.Log(LogLevel.Information, "Called Details method");
 
             return View(vm);
@@ -58,7 +54,6 @@ namespace WebMVC.Controllers
                 Goal = await _goalService.GetGoal(goalId)
             };
 
-            // Will log something more meaningful then this - this is just test for now
             _logger.Log(LogLevel.Information, "Called Edit method");
 
             return View(vm);
