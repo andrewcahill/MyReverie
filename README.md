@@ -2,7 +2,7 @@
 
 # MyReverie
 
-The idea of this repository is to build a goal tracking solution. The goals are could be considered a wishlist of things you would like to acheive by a certain time such as travel to a certain desitnation, achieve a certain qualification, purchase a property, start up a business etc. The set of goals are entirely up to the user - this solution is merely a tool to help users acheive these goals by allowing them to set timelines, reminders, progress trackers, motivational quotations etc.
+The idea of this repository is to build a goal tracking solution. The goals could be considered a wishlist of things you would like to achieve by a certain time such as travel to a certain destination, achieve a certain qualification, purchase a property, start up a business etc. This solution is merely a tool to help users achieve these goals by allowing them to set timelines, reminders, progress trackers, motivational quotations etc.
 
 I plan to outline the features under the Projects Tab of GitHub.
 
