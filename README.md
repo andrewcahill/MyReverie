@@ -40,4 +40,4 @@ If you would like to change to a SQL Server there a a few steps to perform
 2) Update the startup class -> uncomment the SQL Server section and comment the In-Memory section
 3) Ensure your connection string in `appsettings.json` points to your SQL Server instance.
 
-Feel free to suggest improvements, features etc.
+Feel free to suggest improvements, features etc. 
